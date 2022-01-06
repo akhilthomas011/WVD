@@ -6,13 +6,13 @@ Param (
 $resourceGroupName = "AVD-RG"
 $location = "eastus"  
 $VnetName = "aadds-vnet"
-$userName = "wvddomainadmin@$domainName"
+$userName = "odl_user_$(Get-Random -Maximum 999999 -Minimum 100000)@$domainName"
 $password = "D0m@!nAdm!n2021"
 
 $PasswordProfile = New-Object -TypeName Microsoft.Open.AzureAD.Model.PasswordProfile
 $PasswordProfile.Password = $password
 Connect-AzureAD
-New-AzureADUser -DisplayName "WVD Domain Admin" -PasswordProfile $PasswordProfile -UserPrincipalName $userName -AccountEnabled $true -MailNickName "WVDDomainAdmin"
+New-AzureADUser -DisplayName "ODL User $(Get-Random -Maximum 999999 -Minimum 100000)" -PasswordProfile $PasswordProfile -UserPrincipalName $userName -AccountEnabled $true -MailNickName "WVDDomainAdmin"
 
 $templateSourceLocation = "https://raw.githubusercontent.com/akhilthomas011/ARMTemplates/main/ADDS/deploy.json"
 
