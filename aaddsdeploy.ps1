@@ -9,8 +9,6 @@ $VnetName = "aadds-vnet"
 $userName = "wvddomainadmin@$domainName"
 $password = "D0m@!nAdm!n2021"
 
-Install-Module AzureAD -Force
-
 $PasswordProfile = New-Object -TypeName Microsoft.Open.AzureAD.Model.PasswordProfile
 $PasswordProfile.Password = $password
 New-AzureADUser -DisplayName "WVD Domain Admin" -PasswordProfile $PasswordProfile -UserPrincipalName $userName -AccountEnabled $true -MailNickName "WVDDomainAdmin"
@@ -36,3 +34,4 @@ New-AzResourceGroup -Name $resourceGroupName -Location $location -Force
 
 #Deploy the AADDS template 
 New-AzResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateUri $templateSourceLocation -TemplateParameterObject $Params #Deploy the template #Update Virtual Network DNS servers 
+
