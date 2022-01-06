@@ -33,6 +33,12 @@ Add-AzADGroupMember -MemberUserPrincipalName $userName -TargetGroupObjectId $($A
 
 New-AzResourceGroup -Name $resourceGroupName -Location $location -Force
 
+$Params = @{ 
+
+    "domainName" = $domainName 
+
+} 
+
 #Deploy the AADDS template 
 New-AzResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateUri $templateSourceLocation -TemplateParameterObject $Params #Deploy the template #Update Virtual Network DNS servers 
 
