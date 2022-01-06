@@ -5,7 +5,7 @@ Param (
 
 $resourceGroupName = "AVD-RG"
 $VnetName = "aadds-vnet"
-$userName = "odl_user_"
+$userName = "odl_user_12345@$domainName"
 $password = "D0m@!nAdm!n2021"
 
 Install-Module AzureAD -Force
@@ -26,4 +26,4 @@ $Vnet | Set-AzVirtualNetwork
 $securePassword = $password | ConvertTo-SecureString -AsPlainText -Force
 $cred = new-object -typename System.Management.Automation.PSCredential -argumentlist $userName, $SecurePassword
 Connect-AzureAD -Credential $cred | Out-Null
-Set-AzureADUserPassword -ObjectId  (Get-AzureADUser -Filter "startswith(UserPrincipalName,'$userName')").ObjectId -Password $securePassword
+Set-AzureADUserPassword -ObjectId (Get-AzADUser -UserPrincipalName $userName).Id -Password $securePassword
