@@ -11,6 +11,7 @@ $password = "D0m@!nAdm!n2021"
 
 $PasswordProfile = New-Object -TypeName Microsoft.Open.AzureAD.Model.PasswordProfile
 $PasswordProfile.Password = $password
+Connect-AzureAD
 New-AzureADUser -DisplayName "WVD Domain Admin" -PasswordProfile $PasswordProfile -UserPrincipalName $userName -AccountEnabled $true -MailNickName "WVDDomainAdmin"
 
 $templateSourceLocation = "https://raw.githubusercontent.com/akhilthomas011/ARMTemplates/main/ADDS/deploy.json"
